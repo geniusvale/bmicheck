@@ -37,6 +37,7 @@ dependencies:
   toggle_switch: ^2.1.0
   font_awesome_flutter: ^10.4.0
   flutter_ruler_picker: ^1.0.6
+  wheel_chooser: ^1.1.2
 
 dev_dependencies:
   flutter_test:

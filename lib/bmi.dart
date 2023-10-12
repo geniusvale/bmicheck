@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ruler_picker/flutter_ruler_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+import 'package:wheel_chooser/wheel_chooser.dart';
 
 class BMI extends StatefulWidget {
   const BMI({Key? key}) : super(key: key);
@@ -12,7 +13,11 @@ class BMI extends StatefulWidget {
 
 class _BMIState extends State<BMI> {
   RulerPickerController? _rulerPickerController;
-  num currentValue = 100;
+
+  num currentHeight = 150;
+  int currentWeight = 10;
+  int currentAge = 10;
+  int currentGenderCode = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +33,10 @@ class _BMIState extends State<BMI> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text(
+        title: Text(
           'Your Information',
-          style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+          style:
+              TextStyle(color: Colors.blue[900], fontWeight: FontWeight.bold),
         ),
       ),
       body: SafeArea(
@@ -38,41 +44,54 @@ class _BMIState extends State<BMI> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Choose your gender : '),
+            Text(
+              'Choose your gender : ',
+              style: TextStyle(
+                  color: Colors.blue[900], fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 32),
             Center(
               child: ToggleSwitch(
-                minWidth: 100.0,
-                minHeight: 48,
-                initialLabelIndex: 1,
+                minWidth: 132.0,
+                minHeight: 53,
+                initialLabelIndex: 0,
                 cornerRadius: 20.0,
+                borderColor: const [Colors.grey],
+                borderWidth: 1,
                 activeFgColor: Colors.white,
-                inactiveBgColor: Colors.grey,
-                inactiveFgColor: Colors.white,
-                totalSwitches: 2,
-                labels: const ['Male', 'Female'],
-                icons: const [FontAwesomeIcons.mars, FontAwesomeIcons.venus],
+                inactiveBgColor: Colors.white,
+                inactiveFgColor: Colors.grey,
                 activeBgColors: const [
                   [Colors.blue],
                   [Colors.pink]
                 ],
+                totalSwitches: 2,
+                labels: const ['Male', 'Female'],
+                icons: const [FontAwesomeIcons.mars, FontAwesomeIcons.venus],
                 onToggle: (index) {
-                  print('switched to: $index');
+                  currentGenderCode = index!;
+                  print(
+                    'switched to: $index, current gender code = $currentGenderCode',
+                  );
                 },
               ),
             ),
             const SizedBox(height: 32),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text('Height'),
-                Text('cm'),
+              children: [
+                Text(
+                  'Height',
+                  style: TextStyle(
+                      color: Colors.blue[900], fontWeight: FontWeight.bold),
+                ),
+                const Text('cm'),
               ],
             ),
             const SizedBox(height: 32),
             Center(
               child: Text(
-                currentValue.toString(),
+                currentHeight.toString(),
                 style: const TextStyle(fontSize: 64),
               ),
             ),
@@ -92,7 +111,7 @@ class _BMIState extends State<BMI> {
               ],
               onValueChanged: (value) {
                 setState(() {
-                  currentValue = value;
+                  currentHeight = value;
                 });
               },
               width: MediaQuery.of(context).size.width,
@@ -113,21 +132,7 @@ class _BMIState extends State<BMI> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    border: Border.all(),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  width: 150,
-                  height: 150,
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    children: const [
-                      Text('Weight (kg)'),
-                    ],
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(),
+                    border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   width: 150,
@@ -135,18 +140,90 @@ class _BMIState extends State<BMI> {
                   padding: const EdgeInsets.all(8),
                   child: Column(
                     children: [
-                      const Text('Age'),
+                      Text(
+                        'Weight (kg)',
+                        style: TextStyle(
+                            color: Colors.blue[900],
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 120,
+                              height: 64,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(64),
+                                  color: Colors.blue[100]),
+                              child: WheelChooser.integer(
+                                onValueChanged: (i) {
+                                  currentWeight = i;
+                                  print(currentWeight);
+                                },
+                                unSelectTextStyle: const TextStyle(
+                                  color: Colors.grey,
+                                ),
+                                selectTextStyle: TextStyle(
+                                  color: Colors.blue[900],
+                                ),
+                                horizontal: true,
+                                listWidth: 100,
+                                listHeight: 100,
+                                maxValue: 200,
+                                minValue: 1,
+                                step: 1,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  width: 150,
+                  height: 150,
+                  padding: const EdgeInsets.all(8),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Age',
+                        style: TextStyle(
+                            color: Colors.blue[900],
+                            fontWeight: FontWeight.bold),
+                      ),
                       Expanded(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  currentAge++;
+                                });
+                              },
                               icon: const Icon(Icons.add),
                             ),
-                            const Text('12'),
+                            Text(
+                              '$currentAge',
+                              style: TextStyle(
+                                fontSize: 24,
+                                color: Colors.blue[900],
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  currentAge--;
+                                });
+                              },
                               icon: const Icon(Icons.remove),
                             ),
                           ],

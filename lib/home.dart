@@ -18,12 +18,12 @@ class _HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset('assets/healthyPeople.png'),
-            const Text(
+            Text(
               'Calculate My BMI',
               style: TextStyle(
                 fontSize: 36,
                 fontWeight: FontWeight.bold,
-                color: Colors.blue,
+                color: Colors.blue[900],
               ),
             ),
             const SizedBox(height: 12),
