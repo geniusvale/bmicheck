@@ -92,7 +92,7 @@ class _BMIState extends State<BMI> {
             Center(
               child: Text(
                 currentHeight.toString(),
-                style: const TextStyle(fontSize: 64),
+                style: const TextStyle(fontSize: 64, color: Colors.blue),
               ),
             ),
             RulerPicker(
