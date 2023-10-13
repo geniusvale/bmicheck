@@ -1,6 +1,7 @@
 import 'package:bmicheck/bmi.dart';
 import 'package:bmicheck/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -13,6 +14,20 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () => showAboutDialog(context: context, children: [
+            const Text('Developed by : Ariiq Valerian Romero'),
+            const SizedBox(height: 8),
+            const Text(
+              'Design by :\n https://www.behance.net/gallery/175522875/BMI-calculator-App-UI-Design',
+            ),
+          ]),
+          icon: Icon(FontAwesomeIcons.circleInfo, color: darkBlue),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
         child: Column(

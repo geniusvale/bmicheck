@@ -58,7 +58,7 @@ class _BMIState extends State<BMI> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Choose your gender : ',
+              'Birth Gender : ',
               style: TextStyle(
                 color: darkBlue,
                 fontWeight: FontWeight.bold,
