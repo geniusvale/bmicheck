@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+        padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -58,34 +58,33 @@ class _HomeState extends State<Home> {
               ),
             ),
             const Expanded(child: SizedBox()),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const BMI(),
-                          ),
-                        );
-                      },
-                      icon: const Icon(Icons.arrow_right_alt_rounded),
-                      label: const Text('Start'),
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const BMI(),
                         ),
-                        minimumSize: const Size(120, 48),
+                      );
+                    },
+                    icon: const Icon(Icons.arrow_right_alt_rounded),
+                    label: const Text('Start'),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24),
                       ),
+                      minimumSize: const Size(120, 48),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
+            // const SizedBox(height: 16),
           ],
         ),
       ),
