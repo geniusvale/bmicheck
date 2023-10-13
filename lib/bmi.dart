@@ -1,3 +1,7 @@
+import 'dart:math';
+
+import 'package:bmicheck/result.dart';
+import 'package:bmicheck/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ruler_picker/flutter_ruler_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,10 +18,20 @@ class BMI extends StatefulWidget {
 class _BMIState extends State<BMI> {
   RulerPickerController? _rulerPickerController;
 
-  num currentHeight = 150;
+  int currentHeight = 150;
   int currentWeight = 10;
   int currentAge = 10;
   int currentGenderCode = 0;
+
+  countBMI({
+    required int height,
+    required int weight,
+    required int age,
+    required int genderCode,
+  }) {
+    final bmiScore = weight / pow(height / 100, 2);
+    return bmiScore;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +49,7 @@ class _BMIState extends State<BMI> {
         elevation: 0,
         title: Text(
           'Your Information',
-          style:
-              TextStyle(color: Colors.blue[900], fontWeight: FontWeight.bold),
+          style: TextStyle(color: darkBlue, fontWeight: FontWeight.bold),
         ),
       ),
       body: SafeArea(
@@ -47,7 +60,9 @@ class _BMIState extends State<BMI> {
             Text(
               'Choose your gender : ',
               style: TextStyle(
-                  color: Colors.blue[900], fontWeight: FontWeight.bold),
+                color: darkBlue,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 32),
             Center(
@@ -61,9 +76,9 @@ class _BMIState extends State<BMI> {
                 activeFgColor: Colors.white,
                 inactiveBgColor: Colors.white,
                 inactiveFgColor: Colors.grey,
-                activeBgColors: const [
-                  [Colors.blue],
-                  [Colors.pink]
+                activeBgColors: [
+                  [lightBlue],
+                  const [Colors.pink]
                 ],
                 totalSwitches: 2,
                 labels: const ['Male', 'Female'],
@@ -83,7 +98,9 @@ class _BMIState extends State<BMI> {
                 Text(
                   'Height',
                   style: TextStyle(
-                      color: Colors.blue[900], fontWeight: FontWeight.bold),
+                    color: darkBlue,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const Text('cm'),
               ],
@@ -111,7 +128,7 @@ class _BMIState extends State<BMI> {
               ],
               onValueChanged: (value) {
                 setState(() {
-                  currentHeight = value;
+                  currentHeight = value.toInt();
                 });
               },
               width: MediaQuery.of(context).size.width,
@@ -143,8 +160,7 @@ class _BMIState extends State<BMI> {
                       Text(
                         'Weight (kg)',
                         style: TextStyle(
-                            color: Colors.blue[900],
-                            fontWeight: FontWeight.bold),
+                            color: darkBlue, fontWeight: FontWeight.bold),
                       ),
                       Expanded(
                         child: Row(
@@ -166,7 +182,7 @@ class _BMIState extends State<BMI> {
                                   color: Colors.grey,
                                 ),
                                 selectTextStyle: TextStyle(
-                                  color: Colors.blue[900],
+                                  color: darkBlue,
                                 ),
                                 horizontal: true,
                                 listWidth: 100,
@@ -195,8 +211,9 @@ class _BMIState extends State<BMI> {
                       Text(
                         'Age',
                         style: TextStyle(
-                            color: Colors.blue[900],
-                            fontWeight: FontWeight.bold),
+                          color: darkBlue,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       Expanded(
                         child: Row(
@@ -214,7 +231,7 @@ class _BMIState extends State<BMI> {
                               '$currentAge',
                               style: TextStyle(
                                 fontSize: 24,
-                                color: Colors.blue[900],
+                                color: darkBlue,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -236,7 +253,23 @@ class _BMIState extends State<BMI> {
             ),
             const Expanded(child: SizedBox()),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                final currentBmiScore = await countBMI(
+                  genderCode: currentGenderCode,
+                  height: currentHeight,
+                  weight: currentWeight,
+                  age: currentAge,
+                );
+                print(currentBmiScore);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Result(
+                      bmiScore: currentBmiScore,
+                    ),
+                  ),
+                );
+              },
               child: const Text('Calculate'),
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(

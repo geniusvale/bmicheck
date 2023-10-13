@@ -1,4 +1,5 @@
 import 'package:bmicheck/bmi.dart';
+import 'package:bmicheck/styles.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -23,7 +24,7 @@ class _HomeState extends State<Home> {
               style: TextStyle(
                 fontSize: 36,
                 fontWeight: FontWeight.bold,
-                color: Colors.blue[900],
+                color: darkBlue,
               ),
             ),
             const SizedBox(height: 12),
