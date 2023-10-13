@@ -19,8 +19,8 @@ class _BMIState extends State<BMI> {
   RulerPickerController? _rulerPickerController;
 
   int currentHeight = 150;
-  int currentWeight = 10;
-  int currentAge = 10;
+  int currentWeight = 45;
+  int currentAge = 20;
   int currentGenderCode = 0;
 
   countBMI({
@@ -109,7 +109,7 @@ class _BMIState extends State<BMI> {
             Center(
               child: Text(
                 currentHeight.toString(),
-                style: const TextStyle(fontSize: 64, color: Colors.blue),
+                style: TextStyle(fontSize: 64, color: darkBlue),
               ),
             ),
             RulerPicker(
@@ -138,7 +138,7 @@ class _BMIState extends State<BMI> {
                 width: 8,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: Colors.blue.withAlpha(100),
+                  color: darkBlue.withAlpha(100),
                   borderRadius: BorderRadius.circular(5),
                 ),
               ),
@@ -154,6 +154,7 @@ class _BMIState extends State<BMI> {
                   ),
                   width: 150,
                   height: 150,
+                  margin: const EdgeInsets.only(top: 32),
                   padding: const EdgeInsets.all(8),
                   child: Column(
                     children: [
@@ -173,23 +174,32 @@ class _BMIState extends State<BMI> {
                                   border: Border.all(color: Colors.grey),
                                   borderRadius: BorderRadius.circular(64),
                                   color: Colors.blue[100]),
-                              child: WheelChooser.integer(
-                                onValueChanged: (i) {
-                                  currentWeight = i;
-                                  print(currentWeight);
-                                },
-                                unSelectTextStyle: const TextStyle(
-                                  color: Colors.grey,
-                                ),
-                                selectTextStyle: TextStyle(
-                                  color: darkBlue,
-                                ),
-                                horizontal: true,
-                                listWidth: 100,
-                                listHeight: 100,
-                                maxValue: 200,
-                                minValue: 1,
-                                step: 1,
+                              child: Column(
+                                children: [
+                                  const Icon(
+                                    FontAwesomeIcons.caretDown,
+                                    size: 18,
+                                  ),
+                                  WheelChooser.integer(
+                                    initValue: currentWeight,
+                                    onValueChanged: (i) {
+                                      currentWeight = i;
+                                      print(currentWeight);
+                                    },
+                                    unSelectTextStyle: const TextStyle(
+                                      color: Colors.grey,
+                                    ),
+                                    selectTextStyle: TextStyle(
+                                      color: darkBlue,
+                                    ),
+                                    horizontal: true,
+                                    listWidth: 32,
+                                    listHeight: 100,
+                                    maxValue: 200,
+                                    minValue: 1,
+                                    step: 1,
+                                  ),
+                                ],
                               ),
                             ),
                           ],
@@ -205,6 +215,7 @@ class _BMIState extends State<BMI> {
                   ),
                   width: 150,
                   height: 150,
+                  margin: const EdgeInsets.only(top: 32),
                   padding: const EdgeInsets.all(8),
                   child: Column(
                     children: [
@@ -217,7 +228,7 @@ class _BMIState extends State<BMI> {
                       ),
                       Expanded(
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             IconButton(
                               onPressed: () {
@@ -225,7 +236,7 @@ class _BMIState extends State<BMI> {
                                   currentAge++;
                                 });
                               },
-                              icon: const Icon(Icons.add),
+                              icon: const Icon(FontAwesomeIcons.squarePlus),
                             ),
                             Text(
                               '$currentAge',
@@ -241,7 +252,7 @@ class _BMIState extends State<BMI> {
                                   currentAge--;
                                 });
                               },
-                              icon: const Icon(Icons.remove),
+                              icon: const Icon(FontAwesomeIcons.squareMinus),
                             ),
                           ],
                         ),

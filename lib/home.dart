@@ -14,24 +14,35 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset('assets/healthyPeople.png'),
-            Text(
-              'Calculate My BMI',
-              style: TextStyle(
-                fontSize: 36,
-                fontWeight: FontWeight.bold,
-                color: darkBlue,
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                'Calculate My BMI',
+                style: TextStyle(
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                  color: darkBlue,
+                ),
               ),
             ),
             const SizedBox(height: 12),
-            const Text(
-              'Discover your BMI with our app! Enter your height and weight to get valuable insights into yout health. Let\'s start your wellness journey today',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: const Text(
+                'Discover your BMI with our app! Enter your height and weight to get valuable insights into yout health. Let\'s start your wellness journey today!',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  height: 2,
+                ),
+              ),
             ),
+            const Expanded(child: SizedBox()),
             Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,

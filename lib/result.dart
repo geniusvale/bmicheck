@@ -13,7 +13,22 @@ class Result extends StatefulWidget {
 class _ResultState extends State<Result> {
   @override
   void initState() {
+    category();
     super.initState();
+  }
+
+  String bmiCategory = '';
+
+  void category() {
+    if (widget.bmiScore >= 30) {
+      bmiCategory = 'Obese';
+    } else if (widget.bmiScore >= 25) {
+      bmiCategory = 'Overweight';
+    } else if (widget.bmiScore >= 18.5) {
+      bmiCategory = 'Normal';
+    } else {
+      bmiCategory = 'Underweight';
+    }
   }
 
   @override
@@ -29,7 +44,7 @@ class _ResultState extends State<Result> {
         ),
       ),
       body: SafeArea(
-        minimum: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+        minimum: const EdgeInsets.fromLTRB(16, 8, 16, 16),
         child: Column(
           children: [
             const Text(
@@ -37,12 +52,13 @@ class _ResultState extends State<Result> {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Colors.grey,
+                color: Colors.black54,
               ),
             ),
             Text(
               widget.bmiScore.toStringAsFixed(2),
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 24, fontWeight: FontWeight.bold, color: lightBlue),
             ),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 0),
@@ -50,12 +66,47 @@ class _ResultState extends State<Result> {
               height: 360,
               color: Colors.grey,
             ),
-            const Text(
-                'For your height, a normal weight range would be from 59.9 to 81.0 kilograms.'),
-            Text(
-                'Your BMI is ${widget.bmiScore.toStringAsFixed(2)}, indicating your weight is in the Normal category for adults of your height.'),
-            const Text(
-                'Mantaining a healthy weight offers benefits such as reduced risk of chronic diseases, improved mental well-being, and increased longevity.'),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+              child: const Text(
+                  'For your height, a normal weight range would be from 59.9 to 81.0 kilograms.'),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+              child: RichText(
+                text: TextSpan(
+                  text: 'Your BMI is ',
+                  style: const TextStyle(color: Colors.black),
+                  children: [
+                    TextSpan(
+                      text: '${widget.bmiScore.toStringAsFixed(2)}, ',
+                      style: const TextStyle(color: Colors.green),
+                    ),
+                    const TextSpan(
+                      text: 'indicating your weight is in the ',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    TextSpan(
+                      text: bmiCategory,
+                      style: const TextStyle(color: Colors.green),
+                    ),
+                    const TextSpan(
+                      text: ' category for adults of your height.',
+                      style: TextStyle(color: Colors.black),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+              child: const Text(
+                'Mantaining a healthy weight offers benefits such as reduced risk of chronic diseases, improved mental well-being, and increased longevity.',
+                style: TextStyle(
+                  height: 1.5,
+                ),
+              ),
+            ),
             const Expanded(child: SizedBox()),
             ElevatedButton(
               onPressed: () {
