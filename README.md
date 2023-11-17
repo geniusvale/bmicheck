@@ -10,7 +10,7 @@ BMICheck is an app to calculate your Body Mass Index made with flutter.
 
 ## Screenshots
 
-![1](./assets/screenshots/1.png)![2](./assets/screenshots/2.png)![3](./assets/screenshots/3.png)
+![1](./assets/screenshots/bmicheck.png)
 
 ## Contributing
 
