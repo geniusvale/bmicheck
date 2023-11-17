@@ -1,15 +1,16 @@
 # bmicheck
 
-A new Flutter project.
+BMICheck is an app to calculate your Body Mass Index made with flutter.
 
-## Getting Started
+## Technologies
 
-This project is a starting point for a Flutter application.
+- Flutter built-in Navigator
+- Stateful Widgets
+- Design References from [Rim Ayed - Behance](https://www.behance.net/gallery/175522875/BMI-calculator-App-UI-Design)
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Contributing
 
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
